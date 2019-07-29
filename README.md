@@ -73,8 +73,6 @@ I tried on different models to get to know indepth about the model, so these are
 
 **4. Support Vector Machines**
 
-**5. Decision Trees**
-
-**6. GBDT and Random Forests**
+**5. GBDT and Random Forests**
 
 Got pretty good results on all models.
