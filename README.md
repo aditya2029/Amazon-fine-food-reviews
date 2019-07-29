@@ -1,32 +1,75 @@
-# Amazon-fine-food-reviews
+# Amazon-Fine-Food-Reviews-Prediciton
 
-Data Source: https://www.kaggle.com/snap/amazon-fine-food-reviews 
-EDA: https://nycdatascience.com/blog/student-works/amazon-fine-foods-visualization/
+**Checking predictions results for all ML models based on Amazon Fine Food Reviews Dataset.**
+
+#### Objective: Given a review we need to classify whether it is positve or negative.(Predicting semantics of the review)
+
+### Data Description:
+
+Taken dataset from kaggle platform (link :[https://www.kaggle.com/snap/amazon-fine-food-reviews](https://www.kaggle.com/snap/amazon-fine-food-reviews)).
 
 The Amazon Fine Food Reviews dataset consists of reviews of fine foods from Amazon.
 
-Number of reviews: 568,454
-Number of users: 256,059
-Number of products: 74,258
-Timespan: Oct 1999 - Oct 2012
-Number of Attributes/Columns in data: 10 
-Attribute Information:
-Id
-ProductId - unique identifier for the product
-UserId - unqiue identifier for the user
-ProfileName
-HelpfulnessNumerator - number of users who found the review helpful
-HelpfulnessDenominator - number of users who indicated whether they found the review helpful or not
-Score - rating between 1 and 5
-Time - timestamp for the review
-Summary - brief summary of the review
-Text - text of the review
+-   Number of reviews: 568,454
+-   Number of users: 256,059
+-   Number of products: 74,258
+-   Timespan: Oct 1999 - Oct 2012
+-   Number of Attributes/Columns in data: 10
 
-# Objective:
-# Given a review, determine whether the review is positive (Rating of 4 or 5) or negative (rating of 1 or 2).
+Attribute Information: Columns in the dataset
 
-How to determine if a review is positive or negative?
+1.  Id
+2.  ProductId - unique identifier for the product
+3.  UserId - unqiue identifier for the user
+4.  ProfileName
+5.  HelpfulnessNumerator - number of users who found the review helpful
+6.  HelpfulnessDenominator - number of users who indicated whether they found the review helpful or not
+7.  Score - rating between 1 and 5
+8.  Time - timestamp for the review
+9.  Summary - brief summary of the review
+10.  Text - text of the review
 
-We could use the Score/Rating. A rating of 4 or 5 could be cosnidered a positive review. 
-A review of 1 or 2 could be considered negative. A review of 3 is nuetral and ignored. 
-This is an approximate and proxy way of determining the polarity (positivity/negativity) of a review. 
+### Data Preprocessing
+
+Note:
+
+> These steps are same for every model
+
+In  _Data Preprocessing_  we check whether there are any  **duplicate values, missing values**  and we deal with them initally. In the Dataset I have found and removed them. As we see from the attribute information,  _Value of HelpfulnessDenominator should be always greater than value of HelpfulnessNumerator_, because HelpfulnessDenominator is the sum of both useful review and not useful review while HelpfulnessNumerator is only the number of users who found the review helpful. So removing records or datapoints that doesnt satisfy this condition.
+
+we are also removing the neutral reviews(3 star reviews) from the dataset for better predicitons, considering 1 and 2 star reviews as negative reviews and 4 and 5 star as positive reviews.
+
+**Text Preprocessing: Stemming, Stop-words removal, HTML tags removal, Punctuation marks removal**
+
+Now that we have finished deduplication our data requires some preprocessing before we go on further with analysis and making the prediction model.
+
+Hence in the Preprocessing phase we do the following in the order below:-
+
+1.  Begin by removing the html tags
+2.  Remove any punctuations or limited set of special characters like , or . or # etc.
+3.  Check if the word is made up of english letters and is not alpha-numeric
+4.  Check to see if the length of the word is greater than 2 (as it was researched that there is no adjective in 2-letters)
+5.  Convert the word to lowercase
+6.  Remove Stopwords
+7.  Finally Snowball Stemming the word (it was obsereved to be better than Porter Stemming)
+8.  After which we collect the words used to describe positive and negative reviews
+
+**Converting Text into Numerical vectors**
+
+I have explained in code how to convert words into vectors so that algorithm can read them. we have four major vectorizers to convert text to vectors:
+
+-   **Bag of Words**
+-   **Term Frequency Inverse Document Frequency (TF-IDF)**
+-   **Average Word2Vec**
+-   **TF_IDF Word2Vec**
+- 
+I tried on different models to get to know indepth about the model, so these are the list of models I used for training:
+
+**1. K-Nearest Neighbors**
+**2. Naive Bayes**
+**3. Logistic Regression**
+**4. Support Vector Machines**
+**5. Decision Trees**
+**6. GBDT and Random Forests**
+
+Got pretty good results on all models.
