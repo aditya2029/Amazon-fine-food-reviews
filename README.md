@@ -62,14 +62,19 @@ I have explained in code how to convert words into vectors so that algorithm can
 -   **Term Frequency Inverse Document Frequency (TF-IDF)**
 -   **Average Word2Vec**
 -   **TF_IDF Word2Vec**
-- 
+
 I tried on different models to get to know indepth about the model, so these are the list of models I used for training:
 
 **1. K-Nearest Neighbors**
+
 **2. Naive Bayes**
+
 **3. Logistic Regression**
+
 **4. Support Vector Machines**
+
 **5. Decision Trees**
+
 **6. GBDT and Random Forests**
 
 Got pretty good results on all models.
